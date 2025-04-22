@@ -1,64 +1,54 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-// ------------------------------------------------------------------------
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter Application Controller Class
  *
- * This class object is the super class that every library in
- * CodeIgniter will be assigned to.
+ * Superclass from which all application controllers extend.
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/general/controllers.html
+ * @package     CodeIgniter
+ * @subpackage  Libraries
+ * @category    Libraries
  */
+
 class CI_Controller {
 
-	private static $instance;
+    /**
+     * CI Singleton instance
+     *
+     * @var CI_Controller
+     */
+    private static $instance;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		self::$instance =& $this;
-		
-		// Assign all the class objects that were instantiated by the
-		// bootstrap file (CodeIgniter.php) to local class variables
-		// so that CI can run as one big super object.
-		foreach (is_loaded() as $var => $class)
-		{
-			$this->$var =& load_class($class);
-		}
+    /**
+     * Class constructor
+     */
+    public function __construct()
+    {
+        self::$instance = $this;
 
-		$this->load =& load_class('Loader', 'core');
+        // Assign all the class objects that were instantiated by the bootstrap file
+        foreach (is_loaded() as $var => $class) {
+            $this->$var = load_class($class);
+        }
 
-		$this->load->initialize();
-		
-		log_message('debug', "Controller Class Initialized");
-	}
+        $this->load = load_class('Loader', 'core');
+        $this->load->initialize();
 
-	public static function &get_instance()
-	{
-		return self::$instance;
-	}
+        log_message('debug', 'Controller Class Initialized');
+    }
+
+    /**
+     * Get the CI singleton instance
+     *
+     * @return CI_Controller
+     */
+    public static function &get_instance(): CI_Controller
+    {
+        return self::$instance;
+    }
 }
-// END Controller class
+
+// END CI_Controller class
 
 /* End of file Controller.php */
 /* Location: ./system/core/Controller.php */
