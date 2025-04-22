@@ -1,80 +1,152 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8) ]><!-->
-<html lang="en-US">
-<!--<![endif]--><head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Exclusive Unlock:: <?php echo $title; ?></title>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <!--Google Font-->
-	<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.css" type="text/css" media="screen">
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<body class="index-page">
-<header>
-<div class="container">
-<div class="row">
-<div class="col-lg-12">
-<h1 class="home-logo"><a href="<?php echo site_url(); ?>" class="logo"></a></h1>
-</div>
-</div>
-</div>
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+        --button-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        --input-bg: linear-gradient(135deg, #ffffff, #f9f9f9);
+        --text-dark: #333;
+        --border-light: #ddd;
+      }
 
-</header>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #fff;
+        font-family: 'Open Sans', sans-serif;
+        color: var(--text-dark);
+      }
 
-<div class="container">
-  <div class="home-login">
-    <div class="home-login-form">
-<?php $this->load->view($master_template); ?>
-      <div class="nav-bottom">
-        <ul>
-          <?php if($this->uri->segment(1) == "login"): ?>
-          <li><a href="<?php echo site_url('forgot_password'); ?>">Forgot Password</a></li>
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        padding: 2rem;
+      }
+
+      .login-card {
+        width: 100%;
+        max-width: 450px;
+        background: #fff;
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-light);
+      }
+
+      .login-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .form-control {
+        background: var(--input-bg);
+        border: 1px solid var(--border-light);
+        color: var(--text-dark);
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.25rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        background-color: #fff;
+        border-color: #66a6ff;
+        box-shadow: 0 0 0 0.25rem rgba(102, 166, 255, 0.25);
+      }
+
+     
+      .login-title:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
+
+      .login-links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-light);
+      }
+
+      .login-links a {
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+        transition: color 0.2s;
+      }
+
+      .login-links a:hover {
+        color: #fda085;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        color: #888;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2 class="login-title">Iniciar Sesión</h2>
+      <form action="<?php echo site_url('login'); ?>" method="post">
+        <?php $this->load->view($master_template); ?>
+        <div class="login-links">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</a>
+          <?php if ($this->uri->segment(1) == "login"): ?>
+            <a href="<?php echo site_url('forgot_password'); ?>">Forgot Password</a>
           <?php else: ?>
-          <li><a href="<?php echo site_url('login'); ?>" >Login</a></li>
+            <a href="<?php echo site_url('login'); ?>">Login</a>
           <?php endif; ?>
-          <li><a href="<?php echo site_url('register'); ?>">Register Now</a></li>
-          <li><a href="#" data-target=".bs-contact-modal-lg" data-toggle="modal">Contact Us</a></li>
-        </ul>
-      </div>
+          <a href="<?php echo site_url('register'); ?>">Register Now</a>
+        </div>
+      </form>
     </div>
   </div>
-</div>
-<footer class="home-footer">
 
-</footer>
+  <footer>
+    <p class="mb-0">© 2025 IAserverpro. Todos los derechos reservados.</p>
+  </footer>
 
-<div aria-hidden="false" aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1" class="modal fade bs-contact-modal-lg in" >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-          <h4 id="myLargeModalLabel" class="modal-title">Contact Us</h4>
+  <!-- Contact Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-white text-dark">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title">Contacto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>Exclusive Unlock Pvt Ltd.</p>
           <p>Email: info@exclusiveunlock.co.uk</p>
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>js/bootstrap.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-</html>
-
